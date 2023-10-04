@@ -55,6 +55,7 @@ class AppIcons {
   static const String icMore = 'assets/icons/ic_more.svg';
 
 
+  static const String icCancel = 'assets/icons/ic_cancel.svg';
 
   static const String icLogo = 'assets/icons/ic_logo.svg';
   static const String icFilter = 'assets/icons/filter.svg';

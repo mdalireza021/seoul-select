@@ -7,7 +7,8 @@ class QuantityButton extends StatelessWidget {
   final VoidCallback incrementCallback;
   final VoidCallback decrementCallback;
 
-  const QuantityButton({super.key,
+  const QuantityButton({
+    super.key,
     required this.quantity,
     required this.incrementCallback,
     required this.decrementCallback,
@@ -15,41 +16,31 @@ class QuantityButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 100,
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        color: const Color(0xFFEEEEEE),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: AppColors.textGray2,
-          width: 0.2,
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: AppColors.quantityButtonColor,
-            blurRadius: 4,
-            offset: Offset(0, 4),
-            spreadRadius: 1,
-          )
-        ],
-      ),
       child: Row(
         children: [
           Material(
-            color: const Color(0xFFEEEEEE),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(8),
-              bottomLeft: Radius.circular(8),
-            ),
+            color: AppColors.primary,
+            clipBehavior: Clip.hardEdge,
+            borderRadius: BorderRadius.circular(100),
             child: InkWell(
-              onTap: decrementCallback,
-              child: const Padding(
-                padding: EdgeInsets.fromLTRB(5, 5, 8, 5),
-                child: Icon(
-                  Icons.remove,
-                  color: Colors.black,
-                  size: 22,
+              onTap: () => decrementCallback.call(),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(
+                    color: AppColors.textGray2,
+                    width: 0.2,
+                  ),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.fromLTRB(4, 4, 4, 4),
+                  child: Icon(
+                    Icons.remove,
+                    size: 18,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -60,24 +51,32 @@ class QuantityButton extends StatelessWidget {
                 quantity.toString(),
                 style: AppTextStyles.p4.copyWith(
                   color: AppColors.primary,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
           ),
           Material(
-            color: const Color(0xFFEEEEEE),
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(8),
-              bottomRight: Radius.circular(8),
-            ),
+            color: AppColors.primary,
+            clipBehavior: Clip.hardEdge,
+            borderRadius: BorderRadius.circular(100),
             child: InkWell(
-              onTap: incrementCallback,
-              child: const Padding(
-                padding: EdgeInsets.fromLTRB(8, 5, 5, 5),
-                child: Icon(
-                  Icons.add,
-                  color: Colors.black,
-                  size: 20,
+              onTap: () => incrementCallback.call(),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(
+                    color: AppColors.textGray2,
+                    width: 0.2,
+                  ),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.fromLTRB(4, 4, 4, 4),
+                  child: Icon(
+                    Icons.add,
+                    size: 18,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

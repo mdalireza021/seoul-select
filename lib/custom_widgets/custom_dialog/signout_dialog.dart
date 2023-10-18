@@ -73,11 +73,12 @@ class _SignOutDialogState extends State<SignOutDialog> {
             ),
             Material(
               borderRadius: BorderRadius.circular(10),
+              color: AppColors.white,
               clipBehavior: Clip.hardEdge,
               child: InkWell(
                 onTap: () => widget.onClick.call(),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.fromLTRB(10,5,10,5),
                   child: Text(
                     "Sign Out",
                     style: AppTextStyles.h3.copyWith(

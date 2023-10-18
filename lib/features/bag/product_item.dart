@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:seoul_select/custom_widgets/quantity_button.dart';
 import 'package:seoul_select/models/Product.dart';
+import 'package:seoul_select/theme/src/app_icons.dart';
 import '../../theme/src/app_colors.dart';
 import '../../theme/src/app_text_styles.dart';
 
@@ -23,6 +24,7 @@ class ProductItem extends StatefulWidget {
 class _ProductItemState extends State<ProductItem> {
   int quantity = 1;
 
+  bool isChecked = false;
   void incrementCount() => setState(() => quantity++);
   void decrementCount() => setState(() => quantity > 1 ? quantity-- : null);
 
@@ -56,24 +58,39 @@ class _ProductItemState extends State<ProductItem> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(5),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x19000000),
-              blurRadius: 24,
-              offset: Offset(0, 11),
-              spreadRadius: 0,
-            ),
-          ],
-          border: Border.all(
-            color: AppColors.textGray2,
-            width: 0.2,
-          )),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x19000000),
+            blurRadius: 24,
+            offset: Offset(0, 11),
+            spreadRadius: 0,
+          ),
+        ],
+        border: Border.all(
+          color: AppColors.textGray2,
+          width: 0.2,
+        ),
+      ),
       child: Row(
         children: [
-          const SizedBox(
-            width: 10,
+          Expanded(
+            flex: 1,
+            // child: AppIcons.icon(
+            //   AppIcons.icCheck,
+            //   size: 17,
+            // ),
+
+            child: InkWell(
+              onTap: () => setState(() {
+                isChecked = !isChecked;
+              }),
+              child: AppIcons.icon(
+                isChecked ? AppIcons.icCheck : AppIcons.icUncheck,
+                size: 17,
+              ),
+            ),
           ),
           Expanded(
             flex: 2,
@@ -86,17 +103,13 @@ class _ProductItemState extends State<ProductItem> {
               ),
             ),
           ),
-          const SizedBox(
-            width: 15,
-          ),
+          const SizedBox(width: 15),
           Expanded(
             flex: 8,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 Text(
                   widget.productItem.title,
                   style: AppTextStyles.p3,

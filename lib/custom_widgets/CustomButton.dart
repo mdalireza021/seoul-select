@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import '../theme/src/app_colors.dart';
 import '../theme/src/app_text_styles.dart';
 import 'ButtonShape.dart';
@@ -14,6 +15,7 @@ class CustomButton extends StatelessWidget {
   final Color? labelColor;
   final SvgPicture? svgIcon;
   final bool showLoader;
+  final double height;
 
   const CustomButton({
     Key? key,
@@ -24,6 +26,7 @@ class CustomButton extends StatelessWidget {
     this.backgroundColor,
     this.labelColor,
     this.showLoader = false,
+    this.height = 50,
   }) : super(key: key);
 
   @override
@@ -32,8 +35,7 @@ class CustomButton extends StatelessWidget {
 
     if (shape == null || shape == ButtonShape.Standard) {
       btnRadius = BorderRadius.circular(10);
-    }
-    else if (shape == ButtonShape.Rounded) {
+    } else if (shape == ButtonShape.Rounded) {
       btnRadius = BorderRadius.circular(50);
     } else if (shape == ButtonShape.RoundedTop) {
       btnRadius = const BorderRadius.only(
@@ -51,34 +53,38 @@ class CustomButton extends StatelessWidget {
     }
 
     return ElevatedButton(
-      onPressed: () => showLoader ? null : onClick(),
-      style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.zero,
-        backgroundColor: backgroundColor ?? AppColors.primary,
-        shape: RoundedRectangleBorder(
-          borderRadius: btnRadius,
-        ),
-        tapTargetSize: shape == ButtonShape.RoundedTop
-            ? MaterialTapTargetSize.shrinkWrap
-            : null,
-      ),
-      child: svgIcon != null
-          ? Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10,),
-            child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  svgIcon!,
-                  const SizedBox(width: 10.0),
-                  _label(),
-                ],
-              ),
-          )
-          : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10, ),
-            child: _label(),
+        onPressed: () => showLoader ? null : onClick(),
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.zero,
+          backgroundColor: backgroundColor ?? AppColors.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: btnRadius,
           ),
-    );
+          tapTargetSize: shape == ButtonShape.RoundedTop
+              ? MaterialTapTargetSize.shrinkWrap
+              : null,
+        ),
+        child: Container(
+          height: height,
+          child: Center(
+            child: svgIcon != null
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        svgIcon!,
+                        const SizedBox(width: 10.0),
+                        _label(),
+                      ],
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: _label(),
+                  ),
+          ),
+        ));
   }
 
   Widget _label() => Stack(

@@ -6,10 +6,10 @@ import '../theme/src/app_text_styles.dart';
 class CustomTextField extends StatefulWidget {
   final String labelText;
   final String? hintText;
-  final String? initialValue;
   final String? prefixText;
   final bool isPassword;
   final bool? autofocus;
+  final IconData iconData;
   final TextInputAction textInputAction;
   final List<TextInputFormatter>? inputFormatter;
   final TextEditingController? controller;
@@ -22,6 +22,7 @@ class CustomTextField extends StatefulWidget {
   final Color borderColor;
   final Color labelTextColor;
   final Color? cursorColor;
+
   final Function(String? value)? validator, onChanged, onSaved;
 
   const CustomTextField({
@@ -33,7 +34,6 @@ class CustomTextField extends StatefulWidget {
     this.controller,
     this.prefixText,
     this.isPassword = false,
-    this.initialValue,
     this.validator,
     this.onChanged,
     this.onSaved,
@@ -47,13 +47,14 @@ class CustomTextField extends StatefulWidget {
     this.borderColor = AppColors.customBoxBorderColor,
     this.labelTextColor = AppColors.primary,
     this.cursorColor = AppColors.primary,
+    required this.iconData,
   });
 
   @override
-  _CustomTextFieldState createState() => _CustomTextFieldState();
+  CustomTextFieldState createState() => CustomTextFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class CustomTextFieldState extends State<CustomTextField> {
   final FocusNode _focusNode = FocusNode();
   late TextEditingController _controller;
   bool _obscureText = true;
@@ -61,7 +62,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: widget.initialValue ?? '');
+    _controller = TextEditingController(text:'');
   }
 
   @override
@@ -75,7 +76,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-      initialValue: widget.initialValue,
       focusNode: _focusNode,
       autofocus: widget.autofocus ?? false,
       cursorColor: widget.cursorColor,
@@ -85,34 +85,22 @@ class _CustomTextFieldState extends State<CustomTextField> {
       inputFormatters: widget.inputFormatter,
       decoration: InputDecoration(
         prefixText: widget.prefixText,
-        enabledBorder: OutlineInputBorder(
-          gapPadding: 4.0,
-          borderSide: BorderSide(
-            width: 1.0,
-            color: widget.labelTextColor,
+        prefixIcon: Padding(
+          padding: const EdgeInsets.fromLTRB(0,15,0,0),
+          child: Icon(
+            widget.iconData,
+            color: AppColors.primary,
+            size: 25,
           ),
         ),
-        errorBorder: OutlineInputBorder(
-          gapPadding: 4.0,
-          borderSide: BorderSide(
-            color: widget.errorBorderColor,
-            width: 1.0,
-          ),
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.primary),
         ),
-        focusedErrorBorder: OutlineInputBorder(
-          gapPadding: 4.0,
-          borderSide: BorderSide(
-            color: widget.focusedErrorBorderColor,
-            width: 1.0,
-          ),
+
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.primary),
         ),
-        focusedBorder: OutlineInputBorder(
-          gapPadding: 4.0,
-          borderSide: BorderSide(
-            color: widget.focusedBorderColor,
-            width: 1.0,
-          ),
-        ),
+
         labelText: widget.labelText,
         hintText: widget.hintText,
         fillColor: widget.fillColor,
@@ -143,10 +131,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           height: 0.5,
           color: AppColors.brickRed,
         ),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 10.0,
-          horizontal: 10.0,
-        ),
+
       ),
       style: AppTextStyles.p6,
       validator: (value) => widget.validator?.call(value),

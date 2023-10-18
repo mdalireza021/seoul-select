@@ -1,45 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:seoul_select/custom_widgets/CustomButton.dart';
 import 'package:seoul_select/custom_widgets/ScrollViewWithScrollBar.dart';
+import 'package:seoul_select/custom_widgets/custom_appbar.dart';
+import 'package:seoul_select/custom_widgets/custom_dialog/signout_dialog.dart';
 import 'package:seoul_select/theme/src/app_text_styles.dart';
 import '../../theme/src/app_colors.dart';
 import '../../theme/src/app_icons.dart';
+import 'local/about_us_screen.dart';
+import 'local/faqs_screen.dart';
+import 'local/privacy_policy_screen.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class MenuScreen extends StatefulWidget {
+  const MenuScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<MenuScreen> createState() => _MenuScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _MenuScreenState extends State<MenuScreen> {
   final List<Map<String, dynamic>> profileItems1 = [
     {
-      "title": "Personal Dtails",
-      "icon": AppIcons.icon(AppIcons.icPerson, color: AppColors.black,),
+      "title": "Personal Details",
+      "icon": AppIcons.icon(
+        AppIcons.icPerson,
+        color: AppColors.primary,
+      ),
     },
     {
       "title": "My Order",
-      "icon": AppIcons.icon(AppIcons.icMyOrder, color: AppColors.black,),
+      "icon": AppIcons.icon(
+        AppIcons.icMyOrder,
+        color: AppColors.primary,
+      ),
     },
-
-    {
-      "title": "My Favourites",
-      "icon": AppIcons.icon(AppIcons.icMyFavourites, color: AppColors.black,),
-    },
-
     {
       "title": "Shipping Addresses",
-      "icon": AppIcons.icon(AppIcons.icShippingAddress, color: AppColors.black,),
+      "icon": AppIcons.icon(
+        AppIcons.icShippingAddress,
+        color: AppColors.primary,
+      ),
     },
-
     {
       "title": "My Card",
-      "icon": AppIcons.icon(AppIcons.icMyCard, color: AppColors.black,),
+      "icon": AppIcons.icon(
+        AppIcons.icMyCard,
+        color: AppColors.primary,
+      ),
     },
-
     {
       "title": "Settings",
-      "icon": AppIcons.icon(AppIcons.icSettings, color: AppColors.black,),
+      "icon": AppIcons.icon(
+        AppIcons.icSettings,
+        color: AppColors.primary,
+      ),
     },
   ];
 
@@ -48,26 +62,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
       "title": "FAQs",
       "icon": AppIcons.icon(
         AppIcons.icFAQ,
-        color: AppColors.black,
+        color: AppColors.primary,
       ),
     },
     {
       "title": "Privacy Policy",
       "icon": AppIcons.icon(
         AppIcons.icPrivacy,
-        color: AppColors.black,
+        color: AppColors.primary,
       ),
     },
     {
       "title": "About Us",
       "icon": AppIcons.icon(
         AppIcons.icAboutUs,
-        color: AppColors.black,
+        color: AppColors.primary,
       ),
     },
   ];
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const CustomAppBar(),
+      body: rootWidget(),
+    );
+  }
+
+  Widget rootWidget() {
     return ScrollViewWithScrollBar(
       child: Container(
         padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
@@ -133,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
 
-            ///profile item1
+            ///profile section 1
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -152,7 +173,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       final item = profileItems1[index];
-                      return profileItem(
+                      return menuItem(
                         index,
                         item["title"],
                         item["icon"],
@@ -181,21 +202,68 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 children: [
                   ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: profileItems2.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final item = profileItems2[index];
-                      return profileItem(
-                        index,
-                        item["title"],
-                        item["icon"],
-                        (id) => {},
-                      );
-                    },
-                  ),
+                      shrinkWrap: true,
+                      itemCount: profileItems2.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final item = profileItems2[index];
+                        return menuItem(index, item["title"], item["icon"],
+                            (id) {
+                          switch (id) {
+                            case 0:
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => const Faqs()),
+                              );
+                              break;
+                            case 1:
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const PrivacyPolicy(),
+                                ),
+                              );
+                              break;
+
+                            case 2:
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const AboutUs(),
+                                ),
+                              );
+                              break;
+                          }
+                        });
+                      })
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: CustomButton(
+                      svgIcon: SvgPicture.asset(
+                        'assets/icons/ic_signout.svg',
+                        color: AppColors.white,
+                        width: 20,
+                        height: 20,
+                      ),
+                      label: "SIGN OUT",
+                      onClick: () {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => SignOutDialog(
+                            onClick: () {},
+                            onCancel: () => Navigator.of(context).pop(),
+                          ),
+                        );
+                        print("sign out");
+                      }),
+                ),
+              ],
             ),
           ],
         ),
@@ -203,7 +271,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget profileItem(
+  Widget menuItem(
       int index, String title, Widget icon, Function(int id) onClick) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 10, 10, 15),
@@ -242,7 +310,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const Spacer(),
                 const Icon(
                   Icons.keyboard_arrow_right_outlined,
-                  color: AppColors.black,
+                  color: AppColors.primary,
                 ),
               ],
             ),

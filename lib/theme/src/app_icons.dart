@@ -73,5 +73,17 @@ class AppIcons {
   static const String icPrivacy = 'assets/icons/ic_privacy.svg';
   static const String icAboutUs= 'assets/icons/ic_about_us.svg';
 
-  static const String icSignOut= 'assets/icons/ic_signout.svg';
+  static const String icSignOut = 'assets/icons/ic_signout.svg';
+
+  static const String icFacebook = 'assets/icons/ic_facebook.v1.svg';
+  static const String icInstagram = 'assets/icons/ic_instagram.v1.svg';
+  static const String icTwitter = 'assets/icons/ic_twitter.v1.svg';
+  static const String icYoutube = 'assets/icons/ic_youtube.v1.svg';
+
+  static const String icCheck = 'assets/icons/ic_check.svg';
+  static const String icUncheck = 'assets/icons/ic_uncheck.svg';
+
+  ///auth
+  static const String icEmail = 'assets/icons/ic_email.svg';
+  static const String icPassword = 'assets/icons/ic_password.svg';
 }

@@ -35,7 +35,7 @@ class _InputFieldWithButtonState extends State<InputFieldWithButton> {
         children: [
           Container(
             decoration: BoxDecoration(
-      color: const Color(0xFFF3F3F3),
+              color: const Color(0xFFF3F3F3),
               border: Border.all(
                 width: 0.50,
                 color: const Color(0xFFDBDADF),
@@ -48,7 +48,7 @@ class _InputFieldWithButtonState extends State<InputFieldWithButton> {
                   flex: 7,
                   child: TextField(
                     controller: _controller,
-                    cursorColor: AppColors.black,
+                    cursorColor: AppColors.primary,
                     style: AppTextStyles.p6,
                     decoration: InputDecoration(
                       hintText: widget.hintText,
@@ -63,7 +63,7 @@ class _InputFieldWithButtonState extends State<InputFieldWithButton> {
                 Expanded(
                   flex: 3,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(5,0,5,0),
+                    padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
                     child: ButtonApplyPromoCode(
                       onClick: () => widget.callback(_controller.text),
                       buttonColor: widget.buttonColor,
@@ -83,7 +83,8 @@ class _InputFieldWithButtonState extends State<InputFieldWithButton> {
                 padding: const EdgeInsets.fromLTRB(2, 1, 2, 0),
                 child: Wrap(
                   children: [
-                    Text("",
+                    Text(
+                      "",
                       style: AppTextStyles.p6.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w400,

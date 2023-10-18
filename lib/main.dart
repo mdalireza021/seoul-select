@@ -1,12 +1,13 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:seoul_select/features/auth/login_screen.dart';
+import 'package:seoul_select/features/menu/menu_screen.dart';
+import 'package:seoul_select/features/order_confirm/order_confirm_screen.dart';
 import 'package:seoul_select/theme/src/app_colors.dart';
 import 'package:seoul_select/theme/theme.dart';
-import 'custom_widgets/custom_appbar.dart';
-import 'features/cart/cart_screen.dart';
+import 'features/bag/bag_screen.dart';
 import 'features/home/home_screen.dart';
-import 'features/profile/profile_screen.dart';
+import 'features/menu/local/privacy_policy_screen.dart';
 import 'features/wishlist/wishlist_screen.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         ),
         //useMaterial3: true,
       ),
-      home: const MainScreen(),
+      home: const LoginScreen(),
     );
   }
 }
@@ -49,14 +50,15 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     List<Widget> pages = [
       const HomeScreen(),
-      const WishlistScreen(),
-      const CartScreen(),
-      const ProfileScreen(),
+      const OrderConfirmScreen(),
+      //const WishlistScreen(),
+      const BagScreen(),
+      const MenuScreen(),
     ];
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: const CustomAppBar(),
+      //appBar: const CustomAppBar(),
       body: Center(
         child: pages.elementAt(_currentIndex),
       ),
@@ -108,11 +110,8 @@ class _MainScreenState extends State<MainScreen> {
             ],
             onTabChange: (index) {
               setState(() {
-                if (kDebugMode) {
-                  print("index num is $index");
-                }
                 _currentIndex = index;
-              });
+              },);
             },
           ),
         ),

@@ -13,7 +13,7 @@ class _ScrollViewWithScrollBarState extends State<ScrollViewWithScrollBar> {
   @override
   Widget build(BuildContext context) {
     return RawScrollbar(
-      thumbColor: AppColors.black,
+      thumbColor: AppColors.secondary,
       radius: const Radius.circular(20),
       thickness: 5.0,
       thumbVisibility: false,

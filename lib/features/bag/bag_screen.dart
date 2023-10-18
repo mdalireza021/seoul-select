@@ -19,6 +19,8 @@ class BagScreen extends StatefulWidget {
 
 class _BagScreenState extends State<BagScreen> {
   final double price = 0;
+  bool isCheckedAll = false;
+  int totalSelectedItem = 0;
   final List<Product> products = [
     Product(
       id: 1,
@@ -46,6 +48,22 @@ class _BagScreenState extends State<BagScreen> {
     ),
     Product(
       id: 4,
+      title: "Fresh Udon 200gm",
+      imgUrl: "assets/images/samlip-fresh-udon.png",
+      origin: "Korea",
+      quantity: 1,
+      price: 145,
+    ),
+    Product(
+      id: 5,
+      title: "Fresh Udon 200gm",
+      imgUrl: "assets/images/samlip-fresh-udon.png",
+      origin: "Korea",
+      quantity: 1,
+      price: 145,
+    ),
+    Product(
+      id: 6,
       title: "Fresh Udon 200gm",
       imgUrl: "assets/images/samlip-fresh-udon.png",
       origin: "Korea",
@@ -147,7 +165,7 @@ class _BagScreenState extends State<BagScreen> {
                   itemCount: products.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 6),
+                      padding: const EdgeInsets.fromLTRB(5, 0, 5, 6),
                       child: ProductItem(
                         productItem: products[index],
                         onDelete: () => _deleteItem(index),
@@ -304,19 +322,71 @@ class _BagScreenState extends State<BagScreen> {
         //   ),
         // ),
 
-        Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 15),
-                child: CustomButton(
-                    //showLoader: true,
-                    label: "Proceed to Checkout",
-                    backgroundColor: Colors.black,
-                    onClick: () {}),
+        Container(
+          clipBehavior: Clip.hardEdge,
+          decoration: const BoxDecoration(
+          color: AppColors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            )
+          ),
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+          width: double.infinity,
+          child: Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Expanded(
+              //   child: Padding(
+              //     padding: const EdgeInsets.fromLTRB(10, 10, 10, 15),
+              //     child: CustomButton(
+              //         //showLoader: true,
+              //         label: "Proceed to Checkout",
+              //         backgroundColor: Colors.black,
+              //         onClick: () {}),
+              //   ),
+              // ),
+
+              Expanded(
+                flex: 4,
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: () => setState(() => isCheckedAll = !isCheckedAll),
+                      child: AppIcons.icon(
+                        isCheckedAll ? AppIcons.icCheck : AppIcons.icUncheck,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      child: Text(
+                        "All",
+                        style: AppTextStyles.p1Bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+
+              Expanded(
+                  flex: 6,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "BDT 143.22",
+                        style: AppTextStyles.p3,
+                      ),
+                      CustomButton(
+                        //showLoader: true,
+                        label: "Checkout($totalSelectedItem)",
+                        backgroundColor: Colors.black,
+                        onClick: () {},
+                      ),
+                    ],
+                  )),
+            ],
+          ),
         ),
       ],
     );

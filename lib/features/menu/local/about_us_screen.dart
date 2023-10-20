@@ -5,14 +5,14 @@ import 'package:seoul_select/theme/src/app_icons.dart';
 import 'package:seoul_select/theme/src/app_text_styles.dart';
 import '../../../theme/src/app_colors.dart';
 
-class AboutUs extends StatefulWidget {
-  const AboutUs({super.key});
+class AboutUsScreen extends StatefulWidget {
+  const AboutUsScreen({super.key});
 
   @override
-  State<AboutUs> createState() => _AboutUsState();
+  State<AboutUsScreen> createState() => _AboutUsScreenState();
 }
 
-class _AboutUsState extends State<AboutUs> {
+class _AboutUsScreenState extends State<AboutUsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

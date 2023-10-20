@@ -213,13 +213,13 @@ class _MenuScreenState extends State<MenuScreen> {
                             case 0:
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                    builder: (context) => const Faqs()),
+                                    builder: (context) => const FaqsScreen()),
                               );
                               break;
                             case 1:
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => const PrivacyPolicy(),
+                                  builder: (context) => const PrivacyPolicyScreen(),
                                 ),
                               );
                               break;
@@ -227,7 +227,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             case 2:
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => const AboutUs(),
+                                  builder: (context) => const AboutUsScreen(),
                                 ),
                               );
                               break;

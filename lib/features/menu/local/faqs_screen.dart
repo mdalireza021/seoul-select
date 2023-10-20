@@ -5,14 +5,14 @@ import 'package:seoul_select/theme/src/app_text_styles.dart';
 
 import '../../../theme/src/app_colors.dart';
 
-class Faqs extends StatefulWidget {
-  const Faqs({super.key});
+class FaqsScreen extends StatefulWidget {
+  const FaqsScreen({super.key});
 
   @override
-  State<Faqs> createState() => _FaqsState();
+  State<FaqsScreen> createState() => _FaqsScreenState();
 }
 
-class _FaqsState extends State<Faqs> {
+class _FaqsScreenState extends State<FaqsScreen> {
   List<Data> items = [
     Data(
       title: "What is Seoul Select?",

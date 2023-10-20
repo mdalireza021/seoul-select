@@ -19,8 +19,27 @@ extension RouterContextExtension on BuildContext {
     }
   }
 
-  void pushProductDetailsScreen() =>
-      GoRouter.of(this).pushNamed(
-        RouteNames.prodDetails,
-      );
+  void replaceHome({
+    Map<String, String> queryParams = const <String, String>{},
+    Object? extra,
+  }) {
+    GoRouter.of(this).pushReplacementNamed(
+      RouteNames.bottomNav,
+      extra: extra,
+    );
+  }
+
+  void pushFaqsScreen() => GoRouter.of(this).pushNamed(
+    RouteNames.faq,
+  );
+  void pushPrivacyPolicyScreen() => GoRouter.of(this).pushNamed(
+    RouteNames.privacyPolicy,
+  );
+  void pushAboutUsScreen() => GoRouter.of(this).pushNamed(
+    RouteNames.aboutUs,
+  );
+  void pushOrderConfirmScreen() => GoRouter.of(this).pushNamed(
+    RouteNames.orderConfirmScreen,
+  );
+
 }

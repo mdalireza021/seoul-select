@@ -4,14 +4,14 @@ import 'package:seoul_select/custom_widgets/custom_appbar2.dart';
 import 'package:seoul_select/theme/src/app_text_styles.dart';
 import '../../../theme/src/app_colors.dart';
 
-class PrivacyPolicy extends StatefulWidget {
-  const PrivacyPolicy({super.key});
+class PrivacyPolicyScreen extends StatefulWidget {
+  const PrivacyPolicyScreen({super.key});
 
   @override
-  State<PrivacyPolicy> createState() => _PrivacyPolicyState();
+  State<PrivacyPolicyScreen> createState() => _PrivacyPolicyScreenState();
 }
 
-class _PrivacyPolicyState extends State<PrivacyPolicy> {
+class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   List<Data> items = [
     Data(
         title: "Information We Collect",
